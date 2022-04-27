@@ -14,3 +14,5 @@ jobs:
         run: ls -l
       - name: Whoami command
         run: whoami
+      - name: pwd command
+        run: pwd
