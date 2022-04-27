@@ -1,0 +1,16 @@
+name: Say Hello
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  hellow_world:
+    runs-on: self-hosted
+    steps:
+      - name: Saying hello
+        run: echo "Hola mundo!"
+      - name: Listing directory
+        run: ls -l
+      - name: Whoami command
+        run: whoami
