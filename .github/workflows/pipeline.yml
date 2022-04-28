@@ -1,0 +1,30 @@
+name: Deploy App
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  cancel_previous_runs:
+    runs-on: self-hosted
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{github.token}}
+  build_app:
+    runs-on: self-hosted
+    steps:
+      - name: Checking out the app
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Installing node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Installing dependencies
+        run: npm ci
+      - name: Building the app
+        run: npm run build
+      
