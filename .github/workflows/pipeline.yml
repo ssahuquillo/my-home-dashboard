@@ -38,4 +38,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Cleanup workspace after build & deploy the app
-      - run: rm -rf ./*
+        run: rm -rf ./*
