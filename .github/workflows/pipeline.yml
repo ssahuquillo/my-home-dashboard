@@ -8,7 +8,7 @@ jobs:
   cancel_previous_runs:
     runs-on: self-hosted
     steps:
-      - name: Cancel previous runs
+      - name: Cancelling previous runs
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{github.token}}
@@ -27,4 +27,15 @@ jobs:
         run: npm ci
       - name: Building the app
         run: npm run build
-      
+  deploy_app:
+    needs: [build_app]
+    runs-on: self-hosted
+    steps:
+      - name: Copying builded app to server folder
+        run: cp dist /tmp/www/
+  cleanup_workspace:
+    needs: [deploy_app]
+    runs-on: self-hosted
+    steps:
+      - name: Cleanup workspace after build & deploy the app
+      - run: rm -rf ./*
