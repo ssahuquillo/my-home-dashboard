@@ -1,4 +1,4 @@
-name: Deploy App Test
+name: Deploy App
 
 on:
   push:
@@ -13,6 +13,7 @@ jobs:
         with:
           access_token: ${{github.token}}
   build_app:
+    needs: [cancel_previous_runs]
     runs-on: self-hosted
     steps:
       - name: Checking out the app
